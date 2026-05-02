@@ -1,0 +1,33 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+
+# Environment
+.env
+
+# dbt
+target/
+logs/
+dbt_packages/
+package-lock.yml
+
+# DuckDB
+*.duckdb
+*.duckdb.wal
+
+# Data files
+*.csv
+*.parquet
+*.json
+!.env.example
+
+# IDE
+.vscode/
+*.code-workspace
+
+# OS
+Thumbs.db
+Desktop.ini
+.DS_Store

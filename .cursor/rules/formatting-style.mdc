@@ -1,0 +1,15 @@
+---
+description: Formatting preferences for generated markdown and text files
+alwaysApply: true
+---
+
+# Formatting Style
+
+When generating .md files or text content for this project, keep formatting minimal and clean:
+
+- Avoid excessive markdown decorators. No bold on every heading, no horizontal rules between every section.
+- Use plain text headings without bold wrapping (write "Executive Summary" not "**Executive Summary**").
+- Use dashes for lists, not asterisks.
+- Use em-dashes (—) to separate label from description in list items instead of colons with bold labels.
+- Only use tables when the data truly benefits from a grid layout.
+- Keep the overall look closer to a clean document than a decorated wiki page.
