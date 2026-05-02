@@ -9,6 +9,7 @@ dependencies = [
     "python-dotenv>=1.0",
     "loguru>=0.7",
     "dbt-postgres>=1.10.0",
+    "prefect>=3.6.29",
 ]
 
 [dependency-groups]
