@@ -1,7 +1,5 @@
 """Ingest CDC Chronic Disease Indicators via Socrata API into PostgreSQL."""
 
-import json
-
 from loguru import logger
 
 from src.db import get_connection, ensure_raw_schema

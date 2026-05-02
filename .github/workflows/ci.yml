@@ -1,0 +1,60 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  lint-and-test:
+    runs-on: ubuntu-latest
+
+    services:
+      postgres:
+        image: postgres:16
+        env:
+          POSTGRES_DB: health_platform
+          POSTGRES_USER: health_user
+          POSTGRES_PASSWORD: health_pass
+        ports:
+          - 5433:5432
+        options: >-
+          --health-cmd "pg_isready -U health_user"
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+
+    env:
+      POSTGRES_HOST: localhost
+      POSTGRES_PORT: "5433"
+      POSTGRES_DB: health_platform
+      POSTGRES_USER: health_user
+      POSTGRES_PASSWORD: health_pass
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@v4
+
+      - name: Set up Python
+        run: uv python install 3.12
+
+      - name: Install dependencies
+        run: uv sync
+
+      - name: Lint with ruff
+        run: uv run ruff check .
+
+      - name: Run dbt seed
+        run: uv run dbt seed --profiles-dir .
+        working-directory: dbt_project
+
+      - name: Run dbt models
+        run: uv run dbt run --profiles-dir .
+        working-directory: dbt_project
+
+      - name: Run dbt tests
+        run: uv run dbt test --profiles-dir .
+        working-directory: dbt_project

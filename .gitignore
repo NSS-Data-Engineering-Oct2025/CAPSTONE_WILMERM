@@ -24,21 +24,32 @@ package-lock.yml
 !.env.example
 !dbt_project/seeds/*.csv
 
-# IDE
+# IDE / editor (local)
 .vscode/
 *.code-workspace
+.cursor/
 
 # OS
 Thumbs.db
 Desktop.ini
 .DS_Store
 
-# Local / internal documentation (not published to GitHub)
-CAPSTONE_PROPOSAL.md
-CURSOR_CROSS_PROJECT_CONTEXT.md
-Capstone Outline Template.md
-DE Capstone Requirements.md
-PLAN.md
-PROJECT4_CONTEXT.md
-RESUMEN_CONVERSACION.md
+# Markdown — only the repository root README is published
+*.md
+!/README.md
 dbt_project/README.md
+
+# dbt local user state
+dbt_project/.user.yml
+
+# Ad-hoc API smoke tests (local only)
+test_apis.py
+
+# Lockfile — regenerate with `uv lock` on each machine
+uv.lock
+
+# Local exports (Parquet, etc.)
+data/
+
+# Tooling / chat attachments
+assets/
