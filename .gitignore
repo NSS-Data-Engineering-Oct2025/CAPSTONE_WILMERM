@@ -22,6 +22,7 @@ package-lock.yml
 *.parquet
 *.json
 !.env.example
+!dbt_project/seeds/*.csv
 
 # IDE
 .vscode/
