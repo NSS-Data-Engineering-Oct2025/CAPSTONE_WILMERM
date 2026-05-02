@@ -25,7 +25,7 @@ class DatabaseConfig:
 class ApiKeys:
     epa_airnow: str = field(default_factory=lambda: os.environ["EPA_AIRNOW_API_KEY"])
     usda: str = field(default_factory=lambda: os.environ["USDA_API_KEY"])
-    census: str = field(default_factory=lambda: os.environ["CENSUS_API_KEY"])
+    census: str = field(default_factory=lambda: os.environ.get("CENSUS_API_KEY", ""))
 
 
 db_config = DatabaseConfig()
