@@ -32,3 +32,13 @@ package-lock.yml
 Thumbs.db
 Desktop.ini
 .DS_Store
+
+# Local / internal documentation (not published to GitHub)
+CAPSTONE_PROPOSAL.md
+CURSOR_CROSS_PROJECT_CONTEXT.md
+Capstone Outline Template.md
+DE Capstone Requirements.md
+PLAN.md
+PROJECT4_CONTEXT.md
+RESUMEN_CONVERSACION.md
+dbt_project/README.md
