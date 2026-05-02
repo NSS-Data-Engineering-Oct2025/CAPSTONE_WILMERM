@@ -1,0 +1,16 @@
+version: 2
+
+sources:
+  - name: raw
+    schema: raw
+    tables:
+      - name: cdc_chronic_disease
+        description: CDC Chronic Disease Indicators by state and topic
+      - name: usda_foods
+        description: USDA FoodData Central food nutrient data
+      - name: epa_air_quality
+        description: EPA AirNow current air quality observations
+      - name: census_demographics
+        description: U.S. Census ACS 5-year demographic data by state
+      - name: blue_zones
+        description: Blue Zones longevity and diet reference data

@@ -1,0 +1,64 @@
+version: 2
+
+models:
+  - name: stg_cdc_chronic_disease
+    description: Cleaned CDC Chronic Disease Indicators, filtered to U.S. states only
+    columns:
+      - name: state_abbr
+        tests:
+          - not_null
+      - name: topic
+        tests:
+          - not_null
+      - name: data_value
+        tests:
+          - not_null
+
+  - name: stg_usda_foods
+    description: Cleaned USDA FoodData Central records
+    columns:
+      - name: fdc_id
+        tests:
+          - unique
+          - not_null
+      - name: food_name
+        tests:
+          - not_null
+
+  - name: stg_epa_air_quality
+    description: EPA AirNow observations cast to proper types
+    columns:
+      - name: observation_date
+        tests:
+          - not_null
+      - name: aqi
+        tests:
+          - not_null
+      - name: parameter_name
+        tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: ['PM2.5', 'PM10', 'O3', 'NO2', 'CO', 'SO2']
+
+  - name: stg_census_demographics
+    description: U.S. Census ACS data with calculated poverty rate
+    columns:
+      - name: state_fips
+        tests:
+          - unique
+          - not_null
+      - name: state_name
+        tests:
+          - not_null
+      - name: total_population
+        tests:
+          - not_null
+
+  - name: stg_blue_zones
+    description: Blue Zones reference data
+    columns:
+      - name: zone_name
+        tests:
+          - unique
+          - not_null
