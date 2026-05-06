@@ -148,7 +148,44 @@ uv run dbt test --profiles-dir .
 uv run python -m src.export_to_duckdb
 ```
 
-9. Access Metabase at http://localhost:3000 and connect to PostgreSQL (`postgres:5432`, database `health_platform`).
+9. Open Metabase at http://localhost:3000 (on first boot, wait 1–2 minutes for the setup screen).
+
+
+Metabase setup and dashboard
+
+You do not need an external Metabase account. The first time you open http://localhost:3000 you create a local admin user in the browser.
+
+1. Initial setup: language, your name, email, and admin password (stored locally in the Metabase container volume).
+
+2. Add your data → PostgreSQL. Because Metabase runs inside Docker, it reaches Postgres on the Compose network using the service name and internal port:
+
+   - Display name: Health Platform Postgres (or any label)
+   - Host: postgres
+   - Port: 5432
+   - Database name: same as `POSTGRES_DB` in `.env` (default `health_platform`)
+   - Username / Password: same as `POSTGRES_USER` and `POSTGRES_PASSWORD` in `.env`
+
+   Do not use `localhost` or host port `5433` here; those are for tools on your machine, not from inside the Metabase container.
+
+3. When Metabase scans the database, allow all schemas or at least those named like `public_marts`, `public_staging`, `public_intermediate` (dbt writes there alongside `raw`).
+
+4. If tables are empty, run Quick Start steps 5–7 (ingestion + dbt) while Postgres is up.
+
+Recommended models for charts
+
+- `public_marts.mart_health_overview` — one row per state with population, poverty, diabetes / asthma / obesity prevalence, and average AQI.
+- `public_marts.mart_blue_zone_comparison` — nutrition metrics vs Blue Zones reference rows.
+- Optional: `public_staging.stg_epa_air_quality` — TN air observation detail.
+
+Suggested questions (4–6 cards)
+
+- Bar chart: `state_abbr` vs `avg_aqi` (filter out null AQI if needed).
+- Bar chart: `state_abbr` vs `diabetes_prevalence` or `obesity_prevalence`.
+- Table: `mart_health_overview` sorted by `state_name`.
+- Bar chart on `mart_blue_zone_comparison`: `nutrient_name` and `avg_amount` with a filter on `food_category`.
+- Scalar: average `median_household_income` across states or row count on `mart_health_overview`.
+
+Save questions to a collection and pin them as a single dashboard for your demo.
 
 
 Project Structure
