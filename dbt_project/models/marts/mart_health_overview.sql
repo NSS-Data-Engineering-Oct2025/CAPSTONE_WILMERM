@@ -37,7 +37,7 @@ diabetes as (
     select state_abbr, data_value as diabetes_prevalence
     from disease
     where topic = 'Diabetes'
-      and question like '%diagnosed diabetes%'
+      and question like '%Diabetes among adults%'
       and rn = 1
 ),
 
@@ -45,7 +45,7 @@ asthma as (
     select state_abbr, data_value as asthma_prevalence
     from disease
     where topic = 'Asthma'
-      and question like '%current asthma%'
+      and question like '%Current asthma among adults%'
       and rn = 1
 ),
 
@@ -53,7 +53,7 @@ obesity as (
     select state_abbr, data_value as obesity_prevalence
     from disease
     where topic = 'Nutrition, Physical Activity, and Weight Status'
-      and question like '%obesity%'
+      and question like '%Obesity among adults%'
       and rn = 1
 ),
 
